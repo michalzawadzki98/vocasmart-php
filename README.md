@@ -1,7 +1,13 @@
 ## VocaSmart / VocaSmart api
 
 ## Overview
-Flashcards Learning API 
+First version of Vocasmart API.
+
+The API provides:
+
+- **Flashcard generation** – automatically create flashcards to support your learning process.
+- **Flashcard management** – create, update, delete, and organize your flashcards.
+- **Learning sessions API** – manage flashcard and exercise sessions powered by the **FSRS algorithm**, helping you memorize information more effectively through optimized spaced repetition.
 
 ## Installation
 
