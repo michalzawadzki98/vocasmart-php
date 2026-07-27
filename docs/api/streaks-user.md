@@ -1,8 +1,10 @@
 # User streaks API contract
 
-Status: **proposed / needs owner confirmation**  
-Consumers: VocaSmart mobile app (`GET` via `/api/v2/gameification/streaks/user`)  
-Related frontend PR: streak Celebration sheet (uses this payload to decide “played today”).
+Status: **needs owner confirmation** (endpoint already consumed by mobile)  
+Consumers: VocaSmart mobile app — `USER_STREAKS` → `GET /api/v2/gameification/streaks/user`  
+Related frontend work: streak Celebration sheet (uses this payload to decide “played today”).
+
+> This doc does **not** request creating a new endpoint. The client already calls this path. We need the authoritative semantics confirmed (and optionally a `played_today` flag).
 
 ## Endpoint
 
@@ -25,7 +27,7 @@ Envelope matches other v2 resources (`data` wrapper). Payload fields consumed by
 | `longest_streak` | number | All-time best consecutive days |
 | `last_activity_date` | string | Last day that counted toward the streak |
 
-### Example (illustrative)
+### Example (illustrative — replace with a real staging/prod sample)
 
 ```json
 {
@@ -59,11 +61,7 @@ Mobile treats “played today” as:
 
 This is an assumption for UX only — backend owners should either ratify it or publish the authoritative rule / flag above.
 
-## Suggested follow-up implementation (out of scope for this docs PR)
+## Optional follow-up (only if useful)
 
-If streaks are not yet implemented in this repository:
-
-1. Persist per-user `current_streak`, `longest_streak`, `last_activity_date`.
-2. Expose `GET /api/v2/gameification/streaks/user` matching the table above.
-3. Document day boundary + activity sources in this file and regenerate OpenAPI (`composer open-api`).
-4. Optionally add `played_today: boolean` computed server-side so clients do not guess TZ.
+- Add `played_today: boolean` (or `today_secured`) computed server-side so clients do not guess TZ.
+- Mirror this contract into OpenAPI (`composer open-api`) once semantics are locked.
